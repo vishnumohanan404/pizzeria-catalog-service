@@ -1,0 +1,6 @@
+{
+    "yaml.schemas": {
+        "kubernetes": "*.yaml",
+        "https://json.schemastore.org/yamllint.json": "file:///Users/vishnumohan/Projects/baked-bash/pizzeria/catalog-service/config/development.yaml"
+    }
+}

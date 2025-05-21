@@ -10,8 +10,7 @@ export default [
         .withMessage("Category name must be at least 3 characters long"),
     body("priceConfiguration")
         .exists()
-        .withMessage("Price configuration is required")
-        .isString(),
+        .withMessage("Price configuration is required"),
     body("priceConfiguration.*.priceType")
         .exists()
         .withMessage("Price type is required")

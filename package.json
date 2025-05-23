@@ -48,6 +48,7 @@
         ]
     },
     "dependencies": {
+        "@aws-sdk/client-s3": "^3.816.0",
         "@types/express-fileupload": "^1.5.1",
         "config": "^4.0.0",
         "cookie-parser": "^1.4.7",

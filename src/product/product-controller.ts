@@ -44,7 +44,7 @@ export class ProductController {
             attributes: JSON.parse(attributes as string),
             tenantId,
             categoryId,
-            image: "image.jpg",
+            image: imageName,
             isPublish,
         };
         // todo: add proper request body types
@@ -52,5 +52,49 @@ export class ProductController {
             product as unknown as Product,
         );
         res.json({ id: newProduct._id });
+    };
+
+    update = async (req: Request, res: Response, next: NextFunction) => {
+        const result = validationResult(req);
+        if (!result.isEmpty()) {
+            return next(createHttpError(400, result.array()[0].msg as string));
+        }
+        const { productId } = req.params;
+
+        let imageName: string | undefined;
+        let oldImage: string | undefined;
+        if (req.files?.image) {
+            oldImage = await this.productService.getProductImage(productId);
+            const image = req.files.image as UploadedFile;
+            imageName = uuidv4();
+            await this.storage.upload({
+                filename: imageName,
+                fileData: image.data.buffer,
+            });
+            await this.storage.delete(oldImage!);
+        }
+
+        const {
+            name,
+            description,
+            priceConfiguration,
+            attributes,
+            tenantId,
+            categoryId,
+            isPublish,
+            // image,
+        } = req.body;
+        const product = {
+            name,
+            description,
+            priceConfiguration: JSON.parse(priceConfiguration as string),
+            attributes: JSON.parse(attributes as string),
+            tenantId,
+            categoryId,
+            image: imageName ? imageName : (oldImage as string),
+            isPublish,
+        };
+        await this.productService.updatedProduct(productId, product);
+        res.json({ id: productId });
     };
 }

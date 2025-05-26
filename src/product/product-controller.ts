@@ -146,6 +146,18 @@ export class ProductController {
                 limit: req.query.limit ? Number(req.query.limit) : 10,
             },
         );
-        res.json({ products });
+        const finalProducts = (products.data as Product[]).map((product) => {
+            return {
+                ...product,
+                image: this.storage.getObjectUri(product.image),
+            };
+        });
+
+        res.json({
+            data: finalProducts,
+            total: products.totalDocs,
+            pageSize: products.limit,
+            currentPage: products.page,
+        });
     };
 }

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 export interface Product {
+    _id?: mongoose.Types.ObjectId;
     name: string;
     description: string;
     priceConfiguration: string;
@@ -16,4 +17,9 @@ export interface Filter {
     categoryId?: mongoose.Types.ObjectId;
     isPublish?: boolean;
     search?: string;
+}
+
+export interface PaginateQuery {
+    page?: number;
+    limit?: number;
 }

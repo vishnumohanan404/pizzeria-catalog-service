@@ -3,8 +3,15 @@ import { globalErrorHandler } from "./common/middlewares/globalErrorHandler";
 import categoryRouter from "./category/category-router";
 import cookieParser from "cookie-parser";
 import productRouter from "./product/product-router";
+import cors from "cors";
 
 const app = express();
+app.use(
+    cors({
+        origin: ["http://localhost:5174"],
+        credentials: true,
+    }),
+);
 app.use(express.json());
 app.use(cookieParser());
 

@@ -155,7 +155,7 @@ export class ProductController {
 
         res.json({
             data: finalProducts,
-            total: products.totalDocs,
+            total: products.total,
             pageSize: products.limit,
             currentPage: products.page,
         });

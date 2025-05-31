@@ -46,7 +46,7 @@ export class ProductService {
                             $project: {
                                 name: 1,
                                 _id: 1,
-                                priceConfiguraition: 1,
+                                priceConfiguration: 1,
                                 attributes: 1,
                             },
                         },

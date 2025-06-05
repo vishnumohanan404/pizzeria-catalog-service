@@ -22,4 +22,5 @@ router.post(
 );
 
 router.get("/", asyncWrapper(categoryController.index));
+router.get("/:categoryId", asyncWrapper(categoryController.getOne));
 export default router;

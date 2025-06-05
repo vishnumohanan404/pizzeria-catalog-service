@@ -9,4 +9,8 @@ export class CategoryService {
     async getAll() {
         return await CategoryModel.find();
     }
+
+    async getOne(categoryId: string) {
+        return await CategoryModel.findOne({ _id: categoryId });
+    }
 }

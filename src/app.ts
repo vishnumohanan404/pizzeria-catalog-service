@@ -4,11 +4,12 @@ import categoryRouter from "./category/category-router";
 import cookieParser from "cookie-parser";
 import productRouter from "./product/product-router";
 import cors from "cors";
+import toppingRouter from "./topping/topping-router";
 
 const app = express();
 app.use(
     cors({
-        origin: ["http://localhost:5174"],
+        origin: ["http://localhost:3000"],
         credentials: true,
     }),
 );
@@ -21,6 +22,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/categories", categoryRouter);
 app.use("/products", productRouter);
+app.use("/toppings", toppingRouter);
 
 app.use(globalErrorHandler);
 
